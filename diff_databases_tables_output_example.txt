@@ -1,0 +1,110 @@
+COMPACTION_QUEUE 在两个数据库中有字段不同
+	hive5 中：('CQ_HIGHEST_TXN_ID', 'bigint', 'YES', '', None, '')
+	hive7 中：('CQ_HIGHEST_WRITE_ID', 'bigint', 'YES', '', None, '')
+
+COMPLETED_COMPACTIONS 在两个数据库中有字段不同
+	hive5 中：('CC_HIGHEST_TXN_ID', 'bigint', 'YES', '', None, '')
+	hive7 中：('CC_HIGHEST_WRITE_ID', 'bigint', 'YES', '', None, '')
+
+COMPLETED_TXN_COMPONENTS 在两个数据库中字段数量不同
+	hive5 中：[('CTC_TXNID', 'bigint', 'NO', '', None, ''), ('CTC_DATABASE', 'varchar(128)', 'NO', '', None, ''), ('CTC_TABLE', 'varchar(256)', 'YES', '', None, ''), ('CTC_PARTITION', 'varchar(767)', 'YES', '', None, '')]
+	hive7 中：[('CTC_TXNID', 'bigint', 'NO', '', None, ''), ('CTC_DATABASE', 'varchar(128)', 'NO', 'MUL', None, ''), ('CTC_TABLE', 'varchar(256)', 'YES', '', None, ''), ('CTC_PARTITION', 'varchar(767)', 'YES', '', None, ''), ('CTC_TIMESTAMP', 'timestamp', 'NO', '', 'CURRENT_TIMESTAMP', 'DEFAULT_GENERATED'), ('CTC_WRITEID', 'bigint', 'YES', '', None, ''), ('CTC_UPDATE_DELETE', 'char(1)', 'NO', '', None, '')]
+
+CTLGS 在 hive5 中不存在、在 hive7 中存在
+
+DBS 在两个数据库中字段数量不同
+	hive5 中：[('DB_ID', 'bigint', 'NO', 'PRI', None, ''), ('DESC', 'varchar(4000)', 'YES', '', None, ''), ('DB_LOCATION_URI', 'varchar(4000)', 'NO', '', None, ''), ('NAME', 'varchar(128)', 'YES', 'UNI', None, ''), ('OWNER_NAME', 'varchar(128)', 'YES', '', None, ''), ('OWNER_TYPE', 'varchar(10)', 'YES', '', None, '')]
+	hive7 中：[('DB_ID', 'bigint', 'NO', 'PRI', None, ''), ('DESC', 'varchar(4000)', 'YES', '', None, ''), ('DB_LOCATION_URI', 'varchar(4000)', 'NO', '', None, ''), ('NAME', 'varchar(128)', 'YES', 'MUL', None, ''), ('OWNER_NAME', 'varchar(128)', 'YES', '', None, ''), ('OWNER_TYPE', 'varchar(10)', 'YES', '', None, ''), ('CTLG_NAME', 'varchar(256)', 'NO', 'MUL', 'hive', '')]
+
+DB_PRIVS 在两个数据库中字段数量不同
+	hive5 中：[('DB_GRANT_ID', 'bigint', 'NO', 'PRI', None, ''), ('CREATE_TIME', 'int', 'NO', '', None, ''), ('DB_ID', 'bigint', 'YES', 'MUL', None, ''), ('GRANT_OPTION', 'smallint', 'NO', '', None, ''), ('GRANTOR', 'varchar(128)', 'YES', '', None, ''), ('GRANTOR_TYPE', 'varchar(128)', 'YES', '', None, ''), ('PRINCIPAL_NAME', 'varchar(128)', 'YES', '', None, ''), ('PRINCIPAL_TYPE', 'varchar(128)', 'YES', '', None, ''), ('DB_PRIV', 'varchar(128)', 'YES', '', None, '')]
+	hive7 中：[('DB_GRANT_ID', 'bigint', 'NO', 'PRI', None, ''), ('CREATE_TIME', 'int', 'NO', '', None, ''), ('DB_ID', 'bigint', 'YES', 'MUL', None, ''), ('GRANT_OPTION', 'smallint', 'NO', '', None, ''), ('GRANTOR', 'varchar(128)', 'YES', '', None, ''), ('GRANTOR_TYPE', 'varchar(128)', 'YES', '', None, ''), ('PRINCIPAL_NAME', 'varchar(128)', 'YES', '', None, ''), ('PRINCIPAL_TYPE', 'varchar(128)', 'YES', '', None, ''), ('DB_PRIV', 'varchar(128)', 'YES', '', None, ''), ('AUTHORIZER', 'varchar(128)', 'YES', 'MUL', None, '')]
+
+GLOBAL_PRIVS 在两个数据库中字段数量不同
+	hive5 中：[('USER_GRANT_ID', 'bigint', 'NO', 'PRI', None, ''), ('CREATE_TIME', 'int', 'NO', '', None, ''), ('GRANT_OPTION', 'smallint', 'NO', '', None, ''), ('GRANTOR', 'varchar(128)', 'YES', '', None, ''), ('GRANTOR_TYPE', 'varchar(128)', 'YES', '', None, ''), ('PRINCIPAL_NAME', 'varchar(128)', 'YES', 'MUL', None, ''), ('PRINCIPAL_TYPE', 'varchar(128)', 'YES', '', None, ''), ('USER_PRIV', 'varchar(128)', 'YES', '', None, '')]
+	hive7 中：[('USER_GRANT_ID', 'bigint', 'NO', 'PRI', None, ''), ('CREATE_TIME', 'int', 'NO', '', None, ''), ('GRANT_OPTION', 'smallint', 'NO', '', None, ''), ('GRANTOR', 'varchar(128)', 'YES', '', None, ''), ('GRANTOR_TYPE', 'varchar(128)', 'YES', '', None, ''), ('PRINCIPAL_NAME', 'varchar(128)', 'YES', '', None, ''), ('PRINCIPAL_TYPE', 'varchar(128)', 'YES', '', None, ''), ('USER_PRIV', 'varchar(128)', 'YES', '', None, ''), ('AUTHORIZER', 'varchar(128)', 'YES', 'MUL', None, '')]
+
+I_SCHEMA 在 hive5 中不存在、在 hive7 中存在
+
+KEY_CONSTRAINTS 在两个数据库中字段数量不同
+	hive5 中：[('CHILD_CD_ID', 'bigint', 'YES', '', None, ''), ('CHILD_INTEGER_IDX', 'int', 'YES', '', None, ''), ('CHILD_TBL_ID', 'bigint', 'YES', '', None, ''), ('PARENT_CD_ID', 'bigint', 'NO', '', None, ''), ('PARENT_INTEGER_IDX', 'int', 'NO', '', None, ''), ('PARENT_TBL_ID', 'bigint', 'NO', 'MUL', None, ''), ('POSITION', 'bigint', 'NO', 'PRI', None, ''), ('CONSTRAINT_NAME', 'varchar(400)', 'NO', 'PRI', None, ''), ('CONSTRAINT_TYPE', 'smallint', 'NO', '', None, ''), ('UPDATE_RULE', 'smallint', 'YES', '', None, ''), ('DELETE_RULE', 'smallint', 'YES', '', None, ''), ('ENABLE_VALIDATE_RELY', 'smallint', 'NO', '', None, '')]
+	hive7 中：[('CHILD_CD_ID', 'bigint', 'YES', '', None, ''), ('CHILD_INTEGER_IDX', 'int', 'YES', '', None, ''), ('CHILD_TBL_ID', 'bigint', 'YES', '', None, ''), ('PARENT_CD_ID', 'bigint', 'YES', '', None, ''), ('PARENT_INTEGER_IDX', 'int', 'NO', '', None, ''), ('PARENT_TBL_ID', 'bigint', 'NO', 'MUL', None, ''), ('POSITION', 'bigint', 'NO', 'PRI', None, ''), ('CONSTRAINT_NAME', 'varchar(400)', 'NO', 'PRI', None, ''), ('CONSTRAINT_TYPE', 'smallint', 'NO', 'MUL', None, ''), ('UPDATE_RULE', 'smallint', 'YES', '', None, ''), ('DELETE_RULE', 'smallint', 'YES', '', None, ''), ('ENABLE_VALIDATE_RELY', 'smallint', 'NO', '', None, ''), ('DEFAULT_VALUE', 'varchar(400)', 'YES', '', None, '')]
+
+MATERIALIZATION_REBUILD_LOCKS 在 hive5 中不存在、在 hive7 中存在
+
+METASTORE_DB_PROPERTIES 在 hive5 中不存在、在 hive7 中存在
+
+MIN_HISTORY_LEVEL 在 hive5 中不存在、在 hive7 中存在
+
+MV_CREATION_METADATA 在 hive5 中不存在、在 hive7 中存在
+
+MV_TABLES_USED 在 hive5 中不存在、在 hive7 中存在
+
+NEXT_WRITE_ID 在 hive5 中不存在、在 hive7 中存在
+
+NOTIFICATION_LOG 在两个数据库中字段数量不同
+	hive5 中：[('NL_ID', 'bigint', 'NO', 'PRI', None, ''), ('EVENT_ID', 'bigint', 'NO', '', None, ''), ('EVENT_TIME', 'int', 'NO', '', None, ''), ('EVENT_TYPE', 'varchar(32)', 'NO', '', None, ''), ('DB_NAME', 'varchar(128)', 'YES', '', None, ''), ('TBL_NAME', 'varchar(256)', 'YES', '', None, ''), ('MESSAGE', 'longtext', 'YES', '', None, ''), ('MESSAGE_FORMAT', 'varchar(16)', 'YES', '', None, '')]
+	hive7 中：[('NL_ID', 'bigint', 'NO', 'PRI', None, ''), ('EVENT_ID', 'bigint', 'NO', '', None, ''), ('EVENT_TIME', 'int', 'NO', '', None, ''), ('EVENT_TYPE', 'varchar(32)', 'NO', '', None, ''), ('DB_NAME', 'varchar(128)', 'YES', '', None, ''), ('TBL_NAME', 'varchar(256)', 'YES', '', None, ''), ('MESSAGE', 'longtext', 'YES', '', None, ''), ('MESSAGE_FORMAT', 'varchar(16)', 'YES', '', None, ''), ('CAT_NAME', 'varchar(256)', 'YES', '', None, '')]
+
+PARTITION_EVENTS 在两个数据库中字段数量不同
+	hive5 中：[('PART_NAME_ID', 'bigint', 'NO', 'PRI', None, ''), ('DB_NAME', 'varchar(128)', 'YES', '', None, ''), ('EVENT_TIME', 'bigint', 'NO', '', None, ''), ('EVENT_TYPE', 'int', 'NO', '', None, ''), ('PARTITION_NAME', 'varchar(767)', 'YES', 'MUL', None, ''), ('TBL_NAME', 'varchar(256)', 'YES', '', None, '')]
+	hive7 中：[('PART_NAME_ID', 'bigint', 'NO', 'PRI', None, ''), ('DB_NAME', 'varchar(128)', 'YES', '', None, ''), ('EVENT_TIME', 'bigint', 'NO', '', None, ''), ('EVENT_TYPE', 'int', 'NO', '', None, ''), ('PARTITION_NAME', 'varchar(767)', 'YES', 'MUL', None, ''), ('TBL_NAME', 'varchar(256)', 'YES', '', None, ''), ('CAT_NAME', 'varchar(256)', 'YES', '', None, '')]
+
+PART_COL_PRIVS 在两个数据库中字段数量不同
+	hive5 中：[('PART_COLUMN_GRANT_ID', 'bigint', 'NO', 'PRI', None, ''), ('COLUMN_NAME', 'varchar(767)', 'YES', '', None, ''), ('CREATE_TIME', 'int', 'NO', '', None, ''), ('GRANT_OPTION', 'smallint', 'NO', '', None, ''), ('GRANTOR', 'varchar(128)', 'YES', '', None, ''), ('GRANTOR_TYPE', 'varchar(128)', 'YES', '', None, ''), ('PART_ID', 'bigint', 'YES', 'MUL', None, ''), ('PRINCIPAL_NAME', 'varchar(128)', 'YES', '', None, ''), ('PRINCIPAL_TYPE', 'varchar(128)', 'YES', '', None, ''), ('PART_COL_PRIV', 'varchar(128)', 'YES', '', None, '')]
+	hive7 中：[('PART_COLUMN_GRANT_ID', 'bigint', 'NO', 'PRI', None, ''), ('COLUMN_NAME', 'varchar(767)', 'YES', '', None, ''), ('CREATE_TIME', 'int', 'NO', '', None, ''), ('GRANT_OPTION', 'smallint', 'NO', '', None, ''), ('GRANTOR', 'varchar(128)', 'YES', '', None, ''), ('GRANTOR_TYPE', 'varchar(128)', 'YES', '', None, ''), ('PART_ID', 'bigint', 'YES', 'MUL', None, ''), ('PRINCIPAL_NAME', 'varchar(128)', 'YES', '', None, ''), ('PRINCIPAL_TYPE', 'varchar(128)', 'YES', '', None, ''), ('PART_COL_PRIV', 'varchar(128)', 'YES', '', None, ''), ('AUTHORIZER', 'varchar(128)', 'YES', 'MUL', None, '')]
+
+PART_COL_STATS 在两个数据库中字段数量不同
+	hive5 中：[('CS_ID', 'bigint', 'NO', 'PRI', None, ''), ('DB_NAME', 'varchar(128)', 'NO', 'MUL', None, ''), ('TABLE_NAME', 'varchar(256)', 'NO', '', None, ''), ('PARTITION_NAME', 'varchar(767)', 'NO', '', None, ''), ('COLUMN_NAME', 'varchar(767)', 'NO', '', None, ''), ('COLUMN_TYPE', 'varchar(128)', 'NO', '', None, ''), ('PART_ID', 'bigint', 'NO', 'MUL', None, ''), ('LONG_LOW_VALUE', 'bigint', 'YES', '', None, ''), ('LONG_HIGH_VALUE', 'bigint', 'YES', '', None, ''), ('DOUBLE_HIGH_VALUE', 'double(53,4)', 'YES', '', None, ''), ('DOUBLE_LOW_VALUE', 'double(53,4)', 'YES', '', None, ''), ('BIG_DECIMAL_LOW_VALUE', 'varchar(4000)', 'YES', '', None, ''), ('BIG_DECIMAL_HIGH_VALUE', 'varchar(4000)', 'YES', '', None, ''), ('NUM_NULLS', 'bigint', 'NO', '', None, ''), ('NUM_DISTINCTS', 'bigint', 'YES', '', None, ''), ('AVG_COL_LEN', 'double(53,4)', 'YES', '', None, ''), ('MAX_COL_LEN', 'bigint', 'YES', '', None, ''), ('NUM_TRUES', 'bigint', 'YES', '', None, ''), ('NUM_FALSES', 'bigint', 'YES', '', None, ''), ('LAST_ANALYZED', 'bigint', 'NO', '', None, '')]
+	hive7 中：[('CS_ID', 'bigint', 'NO', 'PRI', None, ''), ('DB_NAME', 'varchar(128)', 'NO', '', None, ''), ('TABLE_NAME', 'varchar(256)', 'NO', '', None, ''), ('PARTITION_NAME', 'varchar(767)', 'NO', '', None, ''), ('COLUMN_NAME', 'varchar(767)', 'NO', '', None, ''), ('COLUMN_TYPE', 'varchar(128)', 'NO', '', None, ''), ('PART_ID', 'bigint', 'NO', 'MUL', None, ''), ('LONG_LOW_VALUE', 'bigint', 'YES', '', None, ''), ('LONG_HIGH_VALUE', 'bigint', 'YES', '', None, ''), ('DOUBLE_HIGH_VALUE', 'double(53,4)', 'YES', '', None, ''), ('DOUBLE_LOW_VALUE', 'double(53,4)', 'YES', '', None, ''), ('BIG_DECIMAL_LOW_VALUE', 'varchar(4000)', 'YES', '', None, ''), ('BIG_DECIMAL_HIGH_VALUE', 'varchar(4000)', 'YES', '', None, ''), ('NUM_NULLS', 'bigint', 'NO', '', None, ''), ('NUM_DISTINCTS', 'bigint', 'YES', '', None, ''), ('AVG_COL_LEN', 'double(53,4)', 'YES', '', None, ''), ('MAX_COL_LEN', 'bigint', 'YES', '', None, ''), ('NUM_TRUES', 'bigint', 'YES', '', None, ''), ('NUM_FALSES', 'bigint', 'YES', '', None, ''), ('LAST_ANALYZED', 'bigint', 'NO', '', None, ''), ('BIT_VECTOR', 'blob', 'YES', '', None, ''), ('CAT_NAME', 'varchar(256)', 'NO', 'MUL', 'hive', '')]
+
+PART_PRIVS 在两个数据库中字段数量不同
+	hive5 中：[('PART_GRANT_ID', 'bigint', 'NO', 'PRI', None, ''), ('CREATE_TIME', 'int', 'NO', '', None, ''), ('GRANT_OPTION', 'smallint', 'NO', '', None, ''), ('GRANTOR', 'varchar(128)', 'YES', '', None, ''), ('GRANTOR_TYPE', 'varchar(128)', 'YES', '', None, ''), ('PART_ID', 'bigint', 'YES', 'MUL', None, ''), ('PRINCIPAL_NAME', 'varchar(128)', 'YES', '', None, ''), ('PRINCIPAL_TYPE', 'varchar(128)', 'YES', '', None, ''), ('PART_PRIV', 'varchar(128)', 'YES', '', None, '')]
+	hive7 中：[('PART_GRANT_ID', 'bigint', 'NO', 'PRI', None, ''), ('CREATE_TIME', 'int', 'NO', '', None, ''), ('GRANT_OPTION', 'smallint', 'NO', '', None, ''), ('GRANTOR', 'varchar(128)', 'YES', '', None, ''), ('GRANTOR_TYPE', 'varchar(128)', 'YES', '', None, ''), ('PART_ID', 'bigint', 'YES', 'MUL', None, ''), ('PRINCIPAL_NAME', 'varchar(128)', 'YES', '', None, ''), ('PRINCIPAL_TYPE', 'varchar(128)', 'YES', '', None, ''), ('PART_PRIV', 'varchar(128)', 'YES', '', None, ''), ('AUTHORIZER', 'varchar(128)', 'YES', 'MUL', None, '')]
+
+REPL_TXN_MAP 在 hive5 中不存在、在 hive7 中存在
+
+RUNTIME_STATS 在 hive5 中不存在、在 hive7 中存在
+
+SCHEMA_VERSION 在 hive5 中不存在、在 hive7 中存在
+
+SERDES 在两个数据库中字段数量不同
+	hive5 中：[('SERDE_ID', 'bigint', 'NO', 'PRI', None, ''), ('NAME', 'varchar(128)', 'YES', '', None, ''), ('SLIB', 'varchar(4000)', 'YES', '', None, '')]
+	hive7 中：[('SERDE_ID', 'bigint', 'NO', 'PRI', None, ''), ('NAME', 'varchar(128)', 'YES', '', None, ''), ('SLIB', 'varchar(4000)', 'YES', '', None, ''), ('DESCRIPTION', 'varchar(4000)', 'YES', '', None, ''), ('SERIALIZER_CLASS', 'varchar(4000)', 'YES', '', None, ''), ('DESERIALIZER_CLASS', 'varchar(4000)', 'YES', '', None, ''), ('SERDE_TYPE', 'int', 'YES', '', None, '')]
+
+TAB_COL_STATS 在两个数据库中字段数量不同
+	hive5 中：[('CS_ID', 'bigint', 'NO', 'PRI', None, ''), ('DB_NAME', 'varchar(128)', 'NO', '', None, ''), ('TABLE_NAME', 'varchar(256)', 'NO', '', None, ''), ('COLUMN_NAME', 'varchar(767)', 'NO', '', None, ''), ('COLUMN_TYPE', 'varchar(128)', 'NO', '', None, ''), ('TBL_ID', 'bigint', 'NO', 'MUL', None, ''), ('LONG_LOW_VALUE', 'bigint', 'YES', '', None, ''), ('LONG_HIGH_VALUE', 'bigint', 'YES', '', None, ''), ('DOUBLE_HIGH_VALUE', 'double(53,4)', 'YES', '', None, ''), ('DOUBLE_LOW_VALUE', 'double(53,4)', 'YES', '', None, ''), ('BIG_DECIMAL_LOW_VALUE', 'varchar(4000)', 'YES', '', None, ''), ('BIG_DECIMAL_HIGH_VALUE', 'varchar(4000)', 'YES', '', None, ''), ('NUM_NULLS', 'bigint', 'NO', '', None, ''), ('NUM_DISTINCTS', 'bigint', 'YES', '', None, ''), ('AVG_COL_LEN', 'double(53,4)', 'YES', '', None, ''), ('MAX_COL_LEN', 'bigint', 'YES', '', None, ''), ('NUM_TRUES', 'bigint', 'YES', '', None, ''), ('NUM_FALSES', 'bigint', 'YES', '', None, ''), ('LAST_ANALYZED', 'bigint', 'NO', '', None, '')]
+	hive7 中：[('CS_ID', 'bigint', 'NO', 'PRI', None, ''), ('DB_NAME', 'varchar(128)', 'NO', '', None, ''), ('TABLE_NAME', 'varchar(256)', 'NO', '', None, ''), ('COLUMN_NAME', 'varchar(767)', 'NO', '', None, ''), ('COLUMN_TYPE', 'varchar(128)', 'NO', '', None, ''), ('TBL_ID', 'bigint', 'NO', 'MUL', None, ''), ('LONG_LOW_VALUE', 'bigint', 'YES', '', None, ''), ('LONG_HIGH_VALUE', 'bigint', 'YES', '', None, ''), ('DOUBLE_HIGH_VALUE', 'double(53,4)', 'YES', '', None, ''), ('DOUBLE_LOW_VALUE', 'double(53,4)', 'YES', '', None, ''), ('BIG_DECIMAL_LOW_VALUE', 'varchar(4000)', 'YES', '', None, ''), ('BIG_DECIMAL_HIGH_VALUE', 'varchar(4000)', 'YES', '', None, ''), ('NUM_NULLS', 'bigint', 'NO', '', None, ''), ('NUM_DISTINCTS', 'bigint', 'YES', '', None, ''), ('AVG_COL_LEN', 'double(53,4)', 'YES', '', None, ''), ('MAX_COL_LEN', 'bigint', 'YES', '', None, ''), ('NUM_TRUES', 'bigint', 'YES', '', None, ''), ('NUM_FALSES', 'bigint', 'YES', '', None, ''), ('LAST_ANALYZED', 'bigint', 'NO', '', None, ''), ('BIT_VECTOR', 'blob', 'YES', '', None, ''), ('CAT_NAME', 'varchar(256)', 'NO', 'MUL', 'hive', '')]
+
+TBLS 在两个数据库中字段数量不同
+	hive5 中：[('TBL_ID', 'bigint', 'NO', 'PRI', None, ''), ('CREATE_TIME', 'int', 'NO', '', None, ''), ('DB_ID', 'bigint', 'YES', 'MUL', None, ''), ('LAST_ACCESS_TIME', 'int', 'NO', '', None, ''), ('OWNER', 'varchar(767)', 'YES', '', None, ''), ('RETENTION', 'int', 'NO', '', None, ''), ('SD_ID', 'bigint', 'YES', 'MUL', None, ''), ('TBL_NAME', 'varchar(256)', 'YES', 'MUL', None, ''), ('TBL_TYPE', 'varchar(128)', 'YES', '', None, ''), ('VIEW_EXPANDED_TEXT', 'mediumtext', 'YES', '', None, ''), ('VIEW_ORIGINAL_TEXT', 'mediumtext', 'YES', '', None, ''), ('IS_REWRITE_ENABLED', 'bit(1)', 'NO', '', None, '')]
+	hive7 中：[('TBL_ID', 'bigint', 'NO', 'PRI', None, ''), ('CREATE_TIME', 'int', 'NO', '', None, ''), ('DB_ID', 'bigint', 'YES', 'MUL', None, ''), ('LAST_ACCESS_TIME', 'int', 'NO', '', None, ''), ('OWNER', 'varchar(767)', 'YES', '', None, ''), ('RETENTION', 'int', 'NO', '', None, ''), ('SD_ID', 'bigint', 'YES', 'MUL', None, ''), ('TBL_NAME', 'varchar(256)', 'YES', 'MUL', None, ''), ('TBL_TYPE', 'varchar(128)', 'YES', '', None, ''), ('VIEW_EXPANDED_TEXT', 'mediumtext', 'YES', '', None, ''), ('VIEW_ORIGINAL_TEXT', 'mediumtext', 'YES', '', None, ''), ('IS_REWRITE_ENABLED', 'bit(1)', 'NO', '', None, ''), ('OWNER_TYPE', 'varchar(10)', 'YES', '', None, '')]
+
+TBL_COL_PRIVS 在两个数据库中字段数量不同
+	hive5 中：[('TBL_COLUMN_GRANT_ID', 'bigint', 'NO', 'PRI', None, ''), ('COLUMN_NAME', 'varchar(767)', 'YES', '', None, ''), ('CREATE_TIME', 'int', 'NO', '', None, ''), ('GRANT_OPTION', 'smallint', 'NO', '', None, ''), ('GRANTOR', 'varchar(128)', 'YES', '', None, ''), ('GRANTOR_TYPE', 'varchar(128)', 'YES', '', None, ''), ('PRINCIPAL_NAME', 'varchar(128)', 'YES', '', None, ''), ('PRINCIPAL_TYPE', 'varchar(128)', 'YES', '', None, ''), ('TBL_COL_PRIV', 'varchar(128)', 'YES', '', None, ''), ('TBL_ID', 'bigint', 'YES', 'MUL', None, '')]
+	hive7 中：[('TBL_COLUMN_GRANT_ID', 'bigint', 'NO', 'PRI', None, ''), ('COLUMN_NAME', 'varchar(767)', 'YES', '', None, ''), ('CREATE_TIME', 'int', 'NO', '', None, ''), ('GRANT_OPTION', 'smallint', 'NO', '', None, ''), ('GRANTOR', 'varchar(128)', 'YES', '', None, ''), ('GRANTOR_TYPE', 'varchar(128)', 'YES', '', None, ''), ('PRINCIPAL_NAME', 'varchar(128)', 'YES', '', None, ''), ('PRINCIPAL_TYPE', 'varchar(128)', 'YES', '', None, ''), ('TBL_COL_PRIV', 'varchar(128)', 'YES', '', None, ''), ('TBL_ID', 'bigint', 'YES', 'MUL', None, ''), ('AUTHORIZER', 'varchar(128)', 'YES', 'MUL', None, '')]
+
+TBL_PRIVS 在两个数据库中字段数量不同
+	hive5 中：[('TBL_GRANT_ID', 'bigint', 'NO', 'PRI', None, ''), ('CREATE_TIME', 'int', 'NO', '', None, ''), ('GRANT_OPTION', 'smallint', 'NO', '', None, ''), ('GRANTOR', 'varchar(128)', 'YES', '', None, ''), ('GRANTOR_TYPE', 'varchar(128)', 'YES', '', None, ''), ('PRINCIPAL_NAME', 'varchar(128)', 'YES', '', None, ''), ('PRINCIPAL_TYPE', 'varchar(128)', 'YES', '', None, ''), ('TBL_PRIV', 'varchar(128)', 'YES', '', None, ''), ('TBL_ID', 'bigint', 'YES', 'MUL', None, '')]
+	hive7 中：[('TBL_GRANT_ID', 'bigint', 'NO', 'PRI', None, ''), ('CREATE_TIME', 'int', 'NO', '', None, ''), ('GRANT_OPTION', 'smallint', 'NO', '', None, ''), ('GRANTOR', 'varchar(128)', 'YES', '', None, ''), ('GRANTOR_TYPE', 'varchar(128)', 'YES', '', None, ''), ('PRINCIPAL_NAME', 'varchar(128)', 'YES', '', None, ''), ('PRINCIPAL_TYPE', 'varchar(128)', 'YES', '', None, ''), ('TBL_PRIV', 'varchar(128)', 'YES', '', None, ''), ('TBL_ID', 'bigint', 'YES', 'MUL', None, ''), ('AUTHORIZER', 'varchar(128)', 'YES', 'MUL', None, '')]
+
+TXNS 在两个数据库中字段数量不同
+	hive5 中：[('TXN_ID', 'bigint', 'NO', 'PRI', None, ''), ('TXN_STATE', 'char(1)', 'NO', '', None, ''), ('TXN_STARTED', 'bigint', 'NO', '', None, ''), ('TXN_LAST_HEARTBEAT', 'bigint', 'NO', '', None, ''), ('TXN_USER', 'varchar(128)', 'NO', '', None, ''), ('TXN_HOST', 'varchar(128)', 'NO', '', None, ''), ('TXN_AGENT_INFO', 'varchar(128)', 'YES', '', None, ''), ('TXN_META_INFO', 'varchar(128)', 'YES', '', None, ''), ('TXN_HEARTBEAT_COUNT', 'int', 'YES', '', None, '')]
+	hive7 中：[('TXN_ID', 'bigint', 'NO', 'PRI', None, ''), ('TXN_STATE', 'char(1)', 'NO', '', None, ''), ('TXN_STARTED', 'bigint', 'NO', '', None, ''), ('TXN_LAST_HEARTBEAT', 'bigint', 'NO', '', None, ''), ('TXN_USER', 'varchar(128)', 'NO', '', None, ''), ('TXN_HOST', 'varchar(128)', 'NO', '', None, ''), ('TXN_AGENT_INFO', 'varchar(128)', 'YES', '', None, ''), ('TXN_META_INFO', 'varchar(128)', 'YES', '', None, ''), ('TXN_HEARTBEAT_COUNT', 'int', 'YES', '', None, ''), ('TXN_TYPE', 'int', 'YES', '', None, '')]
+
+TXN_COMPONENTS 在两个数据库中字段数量不同
+	hive5 中：[('TC_TXNID', 'bigint', 'NO', 'MUL', None, ''), ('TC_DATABASE', 'varchar(128)', 'NO', '', None, ''), ('TC_TABLE', 'varchar(128)', 'NO', '', None, ''), ('TC_PARTITION', 'varchar(767)', 'YES', '', None, ''), ('TC_OPERATION_TYPE', 'char(1)', 'NO', '', None, '')]
+	hive7 中：[('TC_TXNID', 'bigint', 'NO', 'MUL', None, ''), ('TC_DATABASE', 'varchar(128)', 'NO', '', None, ''), ('TC_TABLE', 'varchar(128)', 'YES', '', None, ''), ('TC_PARTITION', 'varchar(767)', 'YES', '', None, ''), ('TC_OPERATION_TYPE', 'char(1)', 'NO', '', None, ''), ('TC_WRITEID', 'bigint', 'YES', '', None, '')]
+
+TXN_TO_WRITE_ID 在 hive5 中不存在、在 hive7 中存在
+
+WM_MAPPING 在 hive5 中不存在、在 hive7 中存在
+
+WM_POOL 在 hive5 中不存在、在 hive7 中存在
+
+WM_POOL_TO_TRIGGER 在 hive5 中不存在、在 hive7 中存在
+
+WM_RESOURCEPLAN 在 hive5 中不存在、在 hive7 中存在
+
+WM_TRIGGER 在 hive5 中不存在、在 hive7 中存在
+
