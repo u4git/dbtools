@@ -1,5 +1,3 @@
-python diff_databases_tables.py rds4emr.c1cg6qcu65yc.rds.cn-northwest-1.amazonaws.com.cn 3306 admin 11111111 hive5 rds4emr.c1cg6qcu65yc.rds.cn-northwest-1.amazonaws.com.cn 3306 admin 11111111 hive7
-
 # 工具 diff_databases_tables.py
 
 ## 用途
